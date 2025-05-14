@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ejercicio Web Component : Encapsulado pero Expuesto por HOST o PART</title>
+  <script src="my-card.js" type="module"></script>
+  <style>
+
+    /* esta regla afecta a la parte expuesta del componente: LIGHTDOM */
+    my-card {
+      display: block;
+      margin: 20px auto;
+      max-width: 300px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      background: red;
+      padding: 20px;
+    }
+
+    /* esta regla no afecta, no expuesta de componente : SHADOW DOM */
+    my-card p{
+      background: darkslateblue;
+    }
+
+  </style>
+</head>
+<body>
+ <!--etiqueta HTML-->
+ <my-card title="Tarjeta protegida" content="Este contenido no puede ser estilizado desde fuera."></my-card>
+</body>
+</html>

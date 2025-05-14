@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Lifecycle Demo Component</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1rem;
+    }
+
+    test-lifecycle {
+      background: greenyellow;
+      width: 100%;
+      display: flex;
+      min-height: 100px;
+      margin-bottom: 20px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mylink {
+      background: orange;
+    }
+
+    button {
+      margin-right: .5rem;
+    }
+
+    p {
+      background: green;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Ciclo de Vida</h1>
+
+  <div id="test-area">
+    <span id="status"></span>
+  </div>
+  <button id="connectedButtonTrigger">Forzar Conexion del Componente</button>
+  <button id="disconnectedButtonTrigger">Forzar Desconexion del Componente</button>
+
+  <script type="module">
+    import TestLifecycle from './test-lifecycle.js';
+    const counter = 10;
+
+
+    const element = document.createElement('test-lifecycle');
+
+    document.addEventListener("DOMContentLoaded", () => {
+      console.log('page loaded');
+
+      customElements.define('test-lifecycle', TestLifecycle);
+      console.log('element registered');
+
+
+      const status = document.getElementById('status');
+      let countdown = counter;
+
+      const intervalId = setInterval(() => {
+        if (countdown > 0) {
+          status.textContent = `Estado de Componente: Se conectará automáticamente en... ${countdown}`;
+          countdown--;
+        } else {
+          clearInterval(intervalId);
+          status.remove();
+
+          if (document.getElementById('test-area').querySelectorAll('test-lifecycle').length === 0) {
+            console.log('connecting element to DOM...');
+            document.getElementById('test-area').appendChild(element);
+          } else {
+            console.log('this element is already connected to the DOM');
+          }
+
+
+        }
+      }, 1000);
+
+
+
+    });
+
+    const removeButton = document.getElementById('disconnectedButtonTrigger');
+    removeButton.addEventListener('click', () => {
+      console.log('removing component');
+      element.remove();
+    });
+
+    const addButton = document.getElementById('connectedButtonTrigger');
+    addButton.addEventListener('click', () => {
+      console.log('adding component');
+      document.getElementById('test-area').appendChild(element);
+      
+    });
+  </script>
+</body>
+
+</html>

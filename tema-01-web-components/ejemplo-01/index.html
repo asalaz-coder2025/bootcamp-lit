@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ejercicio Web Component</title>
+  
+  <style>
+/* Estilos externos que buscan afectar nuestro componente web: global css */ 
+
+  /* regla el host del componente web : el host esta expuesto (Light DOM) asi que podemos afectarlo  */
+   my-card {
+      display: block;
+      margin: 20px auto;
+      max-width: 300px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      background: red;
+      padding: 20px;
+    }
+
+  /* reglas para elementos internos del componente web: estos no estan expuestos (Shadow DOM: encapsulado) asi que no podemos afectarlos */
+    my-card span{
+      border: 1px dashed #000;
+      background: #aaadaa;
+    }
+
+    my-card label{
+      padding: 20px;
+      text-decoration: overline;
+      font-weight: 100;
+    }
+
+    /* una excepcion es cuando se manejan slots en esos subelementos interno del componente web: estos si son afectados de forma externa  */
+     my-card p{
+        background-color: yellowgreen;
+        color: green;
+    }  
+    my-card h2{
+        background-color: slateblue;
+        color: white;
+    }  
+
+  </style>
+  
+</head>
+<body>
+ <!--etiqueta HTML-->
+  <my-card>
+    <h2 slot="title">Tarjeta de Ejemplo</h2>
+    <p slot="content">Este es un Web Component reutilizable.</p>
+  </my-card>
+
+  <script src="my-card.js" type="module"></script>
+</body>
+</html>
