@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",                  // ES2020 para navegadores modernos
+    "module": "ESNext",
+    "lib": ["DOM", "ES2020"],
+    "moduleResolution": "Node",
+    "experimentalDecorators": true,      // Requerido para decoradores Lit en TS
+    "useDefineForClassFields": false,    // Prevencion de Errores
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"]
+}
